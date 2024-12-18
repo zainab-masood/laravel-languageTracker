@@ -1,14 +1,10 @@
 <?php
-
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use App\Models\Type;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-
-
-
 
 class VocabularySeeder extends Seeder
 {
@@ -17,14 +13,27 @@ class VocabularySeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::first(); 
+        $user = User::first(); // Assuming a user exists
+        if (!$user) {
+            $this->command->error('No user found. Please create a user before running this seeder.');
+            return;
+        }
+
+        // Retrieve all types as a map with type name as the key
+        $types = Type::pluck('id', 'name'); // ['Kanji' => 1, 'Verb' => 2, ...]
+
+        // Check if the necessary types exist
+        if ($types->isEmpty()) {
+            $this->command->error('No types found. Please seed the types table first.');
+            return;
+        }
 
         DB::table('vocabulary')->insert([
             // Kanji
             [
                 'word' => '山',
                 'meaning' => 'mountain',
-                'category' => 'Kanji',
+                'type_id' => $types['Kanji'] ?? null,
                 'status' => 'Learning',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -33,7 +42,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '川',
                 'meaning' => 'river',
-                'category' => 'Kanji',
+                'type_id' => $types['Kanji'] ?? null,
                 'status' => 'Mastered',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -43,7 +52,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '食べる',
                 'meaning' => 'to eat',
-                'category' => 'Verb',
+                'type_id' => $types['Verb'] ?? null,
                 'status' => 'Learning',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -52,7 +61,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '飲む',
                 'meaning' => 'to drink',
-                'category' => 'Verb',
+                'type_id' => $types['Verb'] ?? null,
                 'status' => 'Mastered',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -62,7 +71,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '猫',
                 'meaning' => 'cat',
-                'category' => 'Noun',
+                'type_id' => $types['Noun'] ?? null,
                 'status' => 'Learning',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -71,7 +80,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '犬',
                 'meaning' => 'dog',
-                'category' => 'Noun',
+                'type_id' => $types['Noun'] ?? null,
                 'status' => 'Mastered',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -81,7 +90,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '大きい',
                 'meaning' => 'big',
-                'category' => 'Adjective',
+                'type_id' => $types['Adjective'] ?? null,
                 'status' => 'Learning',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -90,35 +99,17 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '小さい',
                 'meaning' => 'small',
-                'category' => 'Adjective',
+                'type_id' => $types['Adjective'] ?? null,
                 'status' => 'Mastered',
                 'user_id' => $user->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Additional Words
-            [
-                'word' => 'おはよう',
-                'meaning' => 'Good morning',
-                'category' => 'Expression',
-                'status' => 'Mastered',
-                'user_id' => $user->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'word' => 'ありがとう',
-                'meaning' => 'Thank you',
-                'category' => 'Expression',
-                'status' => 'Learning',
-                'user_id' => $user->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            // Additional Nouns
             [
                 'word' => '日本',
                 'meaning' => 'Japan',
-                'category' => 'Noun',
+                'type_id' => $types['Noun'] ?? null,
                 'status' => 'Learning',
                 'user_id' => $user->id,
                 'created_at' => now(),
@@ -127,7 +118,7 @@ class VocabularySeeder extends Seeder
             [
                 'word' => '友達',
                 'meaning' => 'friend',
-                'category' => 'Noun',
+                'type_id' => $types['Noun'] ?? null,
                 'status' => 'Mastered',
                 'user_id' => $user->id,
                 'created_at' => now(),

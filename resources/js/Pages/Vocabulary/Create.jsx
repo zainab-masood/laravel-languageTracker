@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';  // Inertia POST request
-import DefaultLayout from '../../Layouts/DefaultLayout';  // Layout wrapper
+import { Inertia } from '@inertiajs/inertia';
+import DefaultLayout from '../../Layouts/DefaultLayout';
 
-const Create = ({ categories }) => {
+const Create = ({ types }) => {
     const [formData, setFormData] = useState({
         word: '',
         meaning: '',
-        category_id: '',
-        status: 'Learning',  // Default to 'Learning'
+        type_id: '',
+        status: 'Learning',
     });
 
     const handleChange = (e) => {
@@ -17,14 +17,13 @@ const Create = ({ categories }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Inertia.post('/vocabulary', formData);  // Send POST request to store the vocabulary
+        Inertia.post('/vocabulary', formData);
     };
 
     return (
         <DefaultLayout>
             <div className="container mx-auto px-4 py-8">
                 <h2 className="text-2xl font-bold">Add New Vocabulary</h2>
-
                 <form onSubmit={handleSubmit} className="mt-6">
                     {/* Word Input */}
                     <div>
@@ -52,26 +51,26 @@ const Create = ({ categories }) => {
                         />
                     </div>
 
-                    {/* Category Selection */}
+                    {/* Type Dropdown */}
                     <div className="mt-4">
-                        <label htmlFor="category_id">Category:</label>
+                        <label htmlFor="type_id">Type:</label>
                         <select
-                            name="category_id"
-                            value={formData.category_id}
+                            name="type_id"
+                            value={formData.type_id}
                             onChange={handleChange}
                             className="mt-2 p-2 w-full border rounded"
                             required
                         >
-                            <option value="">Select Category</option>
-                            {categories.map((category) => (
-                                <option key={category.id} value={category.id}>
-                                    {category.name}
+                            <option value="">Select Type</option>
+                            {types.map((type) => (
+                                <option key={type.id} value={type.id}>
+                                    {type.name}
                                 </option>
                             ))}
                         </select>
                     </div>
 
-                    {/* Status Selection */}
+                    {/* Status Dropdown */}
                     <div className="mt-4">
                         <label htmlFor="status">Status:</label>
                         <select

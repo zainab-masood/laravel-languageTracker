@@ -10,16 +10,15 @@ class Vocabulary extends Model
 {
     use HasFactory;
     protected $table = 'vocabulary';
-    protected $fillable = ['word', 'meaning', 'category', 'status', 'user_id'];
+    protected $fillable = ['word', 'meaning', 'type_id', 'status', 'user_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function category()
+    public function type()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Type::class);
     }
-
    
 }

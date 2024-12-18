@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
 import DefaultLayout from '../../Layouts/DefaultLayout';
-import { Inertia } from '@inertiajs/inertia';
 
 const Index = ({ vocabulary }) => {
     return (
@@ -17,7 +16,7 @@ const Index = ({ vocabulary }) => {
                         <div key={word.id} className="p-4 mb-4 bg-white shadow rounded">
                             <h3 className="text-xl font-semibold">{word.word}</h3>
                             <p><strong>Meaning:</strong> {word.meaning}</p>
-                            <p><strong>Category:</strong> {word.category}</p>
+                            <p><strong>Type:</strong> {word.type ? word.type.name : 'N/A'}</p>
                             <p><strong>Status:</strong> {word.status}</p>
                         </div>
                     ))
@@ -35,8 +34,9 @@ const Index = ({ vocabulary }) => {
                                 link.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
                             }`}
                         >
-                            {link.label}
-                        </Link>
+{link.label === "&laquo; Previous" ? "Previous" : 
+             link.label === "Next &raquo;" ? "Next" : 
+             link.label}                          </Link>
                     ))}
                 </div>
             </div>

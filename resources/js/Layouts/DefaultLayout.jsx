@@ -17,6 +17,8 @@ const DefaultLayout = ({ children }) => {
                     <nav>
                         <Link href="/dashboard" className="text-white px-4">Home</Link>
                         <Link href="/activities/create" className="text-white px-4">Add Activity</Link>
+                        <Link href="/quiz/create" className="text-white px-4">Start Quiz</Link>
+
                         <a href="#" onClick={handleLogout} className="text-white px-4">
                             Logout
                         </a>                        

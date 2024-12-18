@@ -5,6 +5,9 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\Category;
+use App\Models\DailyLog;
+use App\Models\Vocabulary;
+
 
 
 class ActController extends Controller
@@ -137,12 +140,39 @@ class ActController extends Controller
         })
         ->with('category') // Include category relationship
         ->paginate(5);
+        $streak = 0;
+        $logs = DailyLog::where('user_id', auth()->id())
+            ->orderBy('date', 'desc')
+            ->get();
+            $previousDate = now()->toDateString();
+    foreach ($logs as $log) {
+        if ($log->date == $previousDate || $log->date == now()->subDay()->toDateString()) {
+            $streak++;
+            $previousDate = $log->date;
+        } else {
+            break; // Break the streak if there are no consecutive dates
+        }
+    }
+    $categories = Category::all(['id', 'name']);
+
+    $masteredWords = Vocabulary::where('user_id', auth()->id())
+    ->where('status', 'Mastered')
+    ->count();
+    $totalVocabulary = Vocabulary::where('user_id', auth()->id())->count();
 
     return Inertia::render('Dashboard', [
         'activities' => $activities,
-        'query' => $query, // Pass the search query to the frontend
+        'query' => $query, 
+        'streak' => $streak,
+        'masteredWords' => $masteredWords,
+        'categories' => $categories,
+
+        'totalVocabulary' => $totalVocabulary,
+
+
     ]);
 }
+
 
 
 }

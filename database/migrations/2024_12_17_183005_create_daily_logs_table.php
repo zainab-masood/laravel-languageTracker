@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vocabulary', function (Blueprint $table) {
+        Schema::create('daily_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('word');
-            $table->string('meaning');
-            $table->enum('status', ['Learning', 'Mastered'])->default('Learning');
+            $table->date('date');
+            $table->integer('completed_words')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vocabulary');
+        Schema::dropIfExists('daily_logs');
     }
 };
