@@ -9,4 +9,6 @@ class DailyLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'completed_words', 'user_id'];}
+    protected $fillable = ['date', 'completed_words', 'user_id'];
+
+}

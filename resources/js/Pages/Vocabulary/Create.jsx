@@ -23,11 +23,10 @@ const Create = ({ types }) => {
     return (
         <DefaultLayout>
             <div className="container mx-auto px-4 py-8">
-                <h2 className="text-2xl font-bold">Add New Vocabulary</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Add New Vocabulary</h2>
                 <form onSubmit={handleSubmit} className="mt-6">
-                    {/* Word Input */}
                     <div>
-                        <label htmlFor="word">Word:</label>
+                        <label htmlFor="word" className="text-gray-900 dark:text-white">Word:</label>
                         <input
                             type="text"
                             name="word"
@@ -35,30 +34,28 @@ const Create = ({ types }) => {
                             value={formData.word}
                             onChange={handleChange}
                             required
-                            className="mt-2 p-2 w-full border rounded"
+                            className="mt-2 p-2 w-full border rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
                         />
                     </div>
 
-                    {/* Meaning Input */}
                     <div className="mt-4">
-                        <label htmlFor="meaning">Meaning:</label>
+                        <label htmlFor="meaning" className="text-gray-900 dark:text-white">Meaning:</label>
                         <textarea
                             name="meaning"
                             value={formData.meaning}
                             onChange={handleChange}
-                            className="mt-2 p-2 w-full border rounded"
+                            className="mt-2 p-2 w-full border rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
                             required
                         />
                     </div>
 
-                    {/* Type Dropdown */}
                     <div className="mt-4">
-                        <label htmlFor="type_id">Type:</label>
+                        <label htmlFor="type_id" className="text-gray-900 dark:text-white">Type:</label>
                         <select
                             name="type_id"
                             value={formData.type_id}
                             onChange={handleChange}
-                            className="mt-2 p-2 w-full border rounded"
+                            className="mt-2 p-2 w-full border rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
                             required
                         >
                             <option value="">Select Type</option>
@@ -70,14 +67,13 @@ const Create = ({ types }) => {
                         </select>
                     </div>
 
-                    {/* Status Dropdown */}
                     <div className="mt-4">
-                        <label htmlFor="status">Status:</label>
+                        <label htmlFor="status" className="text-gray-900 dark:text-white">Status:</label>
                         <select
                             name="status"
                             value={formData.status}
                             onChange={handleChange}
-                            className="mt-2 p-2 w-full border rounded"
+                            className="mt-2 p-2 w-full border rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
                             required
                         >
                             <option value="Learning">Learning</option>
@@ -85,8 +81,10 @@ const Create = ({ types }) => {
                         </select>
                     </div>
 
-                    {/* Submit Button */}
-                    <button type="submit" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded">
+                    <button
+                        type="submit"
+                        className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
                         Add Vocabulary
                     </button>
                 </form>

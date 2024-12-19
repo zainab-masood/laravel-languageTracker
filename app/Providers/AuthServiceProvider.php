@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Vocabulary::class => VocabularyPolicy::class,  // Link the model and the policy
+        Vocabulary::class => VocabularyPolicy::class, 
     ];
 
     /**
@@ -21,7 +21,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // You can add additional service registrations here, but it's not needed for policies
     }
 
     /**
@@ -29,6 +28,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerPolicies(); // Registers the policies mapped in the $policies property
+        $this->registerPolicies(); 
     }
 }

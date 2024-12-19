@@ -10,8 +10,8 @@ class QuizController extends Controller
 {
     public function create()
     {
-        $vocabulary = Vocabulary::inRandomOrder()->take(5)->get(); // Get 5 random vocabulary words
-        return Inertia::render('Quiz/Create', ['vocabulary' => $vocabulary]);
+        $vocabulary = Vocabulary::inRandomOrder()->take(5)->get(); 
+               return Inertia::render('Quiz/Create', ['vocabulary' => $vocabulary]);
     }
 
     public function store(Request $request)

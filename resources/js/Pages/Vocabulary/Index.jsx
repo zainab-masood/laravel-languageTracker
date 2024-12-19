@@ -6,37 +6,33 @@ const Index = ({ vocabulary }) => {
     return (
         <DefaultLayout>
             <div className="container mx-auto px-4 py-8">
-                <h2 className="text-2xl font-bold mb-4">My Vocabulary</h2>
-                {/* Link to the create vocabulary page */}
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">My Vocabulary</h2>
                 <Link href="/vocabulary/create" className="text-blue-500 mb-4 inline-block">Add New Word</Link>
 
-                {/* Vocabulary List */}
                 {vocabulary.data.length > 0 ? (
                     vocabulary.data.map((word) => (
-                        <div key={word.id} className="p-4 mb-4 bg-white shadow rounded">
-                            <h3 className="text-xl font-semibold">{word.word}</h3>
-                            <p><strong>Meaning:</strong> {word.meaning}</p>
-                            <p><strong>Type:</strong> {word.type ? word.type.name : 'N/A'}</p>
-                            <p><strong>Status:</strong> {word.status}</p>
+                        <div key={word.id} className="p-4 mb-4 bg-white dark:bg-gray-800 shadow rounded">
+                            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{word.word}</h3>
+                            <p className="text-gray-900 dark:text-white"><strong>Meaning:</strong> {word.meaning}</p>
+                            <p className="text-gray-900 dark:text-white"><strong>Type:</strong> {word.type ? word.type.name : 'N/A'}</p>
+                            <p className="text-gray-900 dark:text-white"><strong>Status:</strong> {word.status}</p>
                         </div>
                     ))
                 ) : (
-                    <p>No vocabulary found. Start adding new words!</p>
+                    <p className="text-gray-900 dark:text-white">No vocabulary found. Start adding new words!</p>
                 )}
 
-                {/* Pagination Links */}
                 <div className="mt-4 flex justify-center space-x-2">
                     {vocabulary.links.map((link, index) => (
                         <Link
                             key={index}
                             href={link.url}
-                            className={`px-3 py-1 border rounded ${
-                                link.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-                            }`}
+                            className={`px-3 py-1 border rounded ${link.active ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white'}`}
                         >
-{link.label === "&laquo; Previous" ? "Previous" : 
-             link.label === "Next &raquo;" ? "Next" : 
-             link.label}                          </Link>
+                            {link.label === "&laquo; Previous" ? "Previous" : 
+                             link.label === "Next &raquo;" ? "Next" : 
+                             link.label}
+                        </Link>
                     ))}
                 </div>
             </div>

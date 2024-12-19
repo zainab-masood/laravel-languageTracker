@@ -131,15 +131,30 @@ class ActController extends Controller
 
     public function dashboard(Request $request)
 {
-    $query = $request->input('query'); // Get the search query from the request
+    $query = $request->input('query', '');
+    $category = $request->input('category', '');
 
-    $activities = Activity::where('user_id', auth()->id())
-        ->when($query, function ($q) use ($query) {
-            $q->where('activity_name', 'LIKE', "%{$query}%") // Search in activity name
-              ->orWhere('description', 'LIKE', "%{$query}%"); // Search in description
-        })
-        ->with('category') // Include category relationship
-        ->paginate(5);
+    $activitiesQuery = Activity::with('category')->where('user_id', auth()->id());
+
+    if (!empty($query)) {
+        $activitiesQuery->where(function ($q) use ($query) {
+            $q->where('activity_name', 'like', '%' . $query . '%')
+              ->orWhere('description', 'like', '%' . $query . '%');
+        });
+    }
+
+    if (!empty($category)) {
+        $activitiesQuery->whereHas('category', function ($q) use ($category) {
+            $q->where('name', $category);
+        });
+    }
+
+    $activities = $activitiesQuery->paginate(5);
+
+
+
+
+   
         $streak = 0;
         $logs = DailyLog::where('user_id', auth()->id())
             ->orderBy('date', 'desc')
@@ -150,10 +165,9 @@ class ActController extends Controller
             $streak++;
             $previousDate = $log->date;
         } else {
-            break; // Break the streak if there are no consecutive dates
+            break; 
         }
     }
-    $categories = Category::all(['id', 'name']);
 
     $masteredWords = Vocabulary::where('user_id', auth()->id())
     ->where('status', 'Mastered')
@@ -164,8 +178,9 @@ class ActController extends Controller
         'activities' => $activities,
         'query' => $query, 
         'streak' => $streak,
+        'categories' => Category::all(),
+
         'masteredWords' => $masteredWords,
-        'categories' => $categories,
 
         'totalVocabulary' => $totalVocabulary,
 

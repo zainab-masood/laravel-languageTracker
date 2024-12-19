@@ -8,28 +8,22 @@ use App\Models\User;
 
 class VocabularySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $user = User::first(); // Assuming a user exists
+        $user = User::first();
         if (!$user) {
             $this->command->error('No user found. Please create a user before running this seeder.');
             return;
         }
 
-        // Retrieve all types as a map with type name as the key
-        $types = Type::pluck('id', 'name'); // ['Kanji' => 1, 'Verb' => 2, ...]
+        $types = Type::pluck('id', 'name');
 
-        // Check if the necessary types exist
         if ($types->isEmpty()) {
             $this->command->error('No types found. Please seed the types table first.');
             return;
         }
 
         DB::table('vocabulary')->insert([
-            // Kanji
             [
                 'word' => '山',
                 'meaning' => 'mountain',
@@ -48,7 +42,6 @@ class VocabularySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Verbs
             [
                 'word' => '食べる',
                 'meaning' => 'to eat',
@@ -67,7 +60,6 @@ class VocabularySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Nouns
             [
                 'word' => '猫',
                 'meaning' => 'cat',
@@ -86,7 +78,6 @@ class VocabularySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Adjectives
             [
                 'word' => '大きい',
                 'meaning' => 'big',
@@ -105,7 +96,6 @@ class VocabularySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Additional Nouns
             [
                 'word' => '日本',
                 'meaning' => 'Japan',

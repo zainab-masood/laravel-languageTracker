@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react'; // Inertia Link for navigation
+import { Link } from '@inertiajs/inertia-react';
 import { Head } from '@inertiajs/react';
 
 const Welcome = ({ auth }) => {
@@ -8,14 +8,21 @@ const Welcome = ({ auth }) => {
             <Head title="Welcome to Language Learning Tracker" />
             <div className="bg-gray-100 text-black dark:bg-gray-800 dark:text-white min-h-screen flex flex-col justify-center">
                 <div className="flex justify-center items-center flex-col p-6 space-y-6">
-                    {/* Header */}
                     <header className="text-center">
+                    <div>
+            <Link href="/dashboard" className="flex justify-center shrink-0 items-center">
+                        <img
+                            src="/images/logo.jpg"
+                            alt="App Logo"
+                            className="h-20 w-20 fill-current text-gray-500"
+                        />
+                    </Link>
+            </div>
                         <h1 className="text-4xl font-extrabold text-blue-600 dark:text-blue-400">
                             Language Learning Tracker
                         </h1>
                     </header>
 
-                    {/* Main Content */}
                     <main className="flex flex-col justify-center items-center space-y-6">
                         <div className="max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg">
                             
@@ -25,7 +32,6 @@ const Welcome = ({ auth }) => {
                                 achieving your learning goals!
                             </p>
 
-                            {/* Call to Action Button */}
                             <div className="mt-6 text-center">
                                 <Link
                                     href={route('dashboard')}
@@ -36,7 +42,6 @@ const Welcome = ({ auth }) => {
                             </div>
                         </div>
 
-                        {/* Auth Links */}
                         <div className="flex justify-center gap-4">
                             {auth.user ? (
                                 <Link
