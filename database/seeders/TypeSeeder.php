@@ -16,6 +16,10 @@ class TypeSeeder extends Seeder
             ['name' => 'Verb', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Adjective', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Kanji', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Hiragana', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Katakana', 'created_at' => now(), 'updated_at' => now()],
+
+
         ]);
     }
 }
