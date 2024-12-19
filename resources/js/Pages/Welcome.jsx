@@ -27,9 +27,9 @@ const Welcome = ({ auth }) => {
                         <div className="max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg">
                             
                             <p className="mt-4 text-gray-600 dark:text-gray-300 text-center">
-                                Our Language Learning Tracker helps you monitor your progress, whether you're
-                                practicing speaking, reading, or writing. Stay organized and motivated while
-                                achieving your learning goals!
+                                Language Learning Tracker helps you monitor your progress, whether you're
+                                practicing speaking, reading, or writing. Stay organized and motivated to complete 
+                                your learning goals!
                             </p>
 
                             <div className="mt-6 text-center">
